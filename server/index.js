@@ -26,4 +26,9 @@ app.use((err, req, res, next) => {
 });
 
 await connect();
-app.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`));
+// On Vercel the exported app runs as a function; locally, listen on PORT.
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`));
+}
+
+export default app;
